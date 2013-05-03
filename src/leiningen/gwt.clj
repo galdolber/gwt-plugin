@@ -1,4 +1,5 @@
 (ns leiningen.gwt
+  "Runs and compiles GWT applications"
   (:import [java.io BufferedReader])
   (:require [clojure.string :as string]))
 
