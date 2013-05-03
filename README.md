@@ -6,6 +6,10 @@ A Leiningen plugin run and build gwt applications.
 
 Put `[gwt-plugin "0.1.0"]` into the `:plugins` vector of your project.clj.
 
+You can also automate the tasks using
+
+`:prep-tasks ["resources" "javacc" "compile"]`
+
 ## Resources task
 
 Copies all resources to the compile-path and optionally copies web resources to the web-path.
