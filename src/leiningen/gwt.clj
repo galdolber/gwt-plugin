@@ -72,9 +72,7 @@
               "-codeServerPort" (str codeServerPort)
               "-startupUrl" startupUrl
               module]]
-    (let [r (apply sh (filter (comp not nil?) (addJvmArgs args extraJvmArgs)))]
-      (println (:out r))
-      (println (:err r)))))
+    (apply sh (filter (comp not nil?) (addJvmArgs args extraJvmArgs)))))
 
 (defmethod task "compile" [project args]
   (let [{:keys [extraJvmArgs deploy gen war logLevel port
@@ -91,9 +89,7 @@
               "-war" (path war)
               "-logLevel" logLevel
               module]]
-    (let [r (apply sh (filter (comp not nil?) (addJvmArgs args extraJvmArgs)))]
-      (println (:out r))
-      (println (:err r)))))
+    (apply sh (filter (comp not nil?) (addJvmArgs args extraJvmArgs)))))
 
 (defn gwt [project & args]
   (task project args))
