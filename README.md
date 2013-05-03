@@ -11,8 +11,11 @@ Put `[gwt-plugin "0.1.0"]` into the `:plugins` vector of your project.clj.
 Copies all resources to the compile-path and optionally copies web resources to the web-path.
 
 Sample web resources configuration (to add in your project.clj):
-    :web-resource-paths ["src/main/webapp"]
-    :web-path "target/server/static"
+
+```
+:web-resource-paths ["src/main/webapp"]
+:web-path "target/server/static"
+```
 
     $ lein resources
 
@@ -26,12 +29,15 @@ Only shows errors thrown in the last compilation.
 ## Gwt tasks
 
 Sample configuration (to add in your project.clj):
-    :gwt {:module "com.your.Module"
-         :localWorkers 1
-         :war "path/to/war/folder"
-         :deploy "path/to/extra/folder"
-         :noserver false
-         :extraJvmArgs "-XX:MaxPermSize=512m"}
+
+```
+:gwt {:module "com.your.Module"
+      :localWorkers 1
+      :war "path/to/war/folder"
+      :deploy "path/to/extra/folder"
+      :noserver false
+      :extraJvmArgs "-XX:MaxPermSize=512m"}
+ ```
 
     $ lein gwt compile
     $ lein gwt run
