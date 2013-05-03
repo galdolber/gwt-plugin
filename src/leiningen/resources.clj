@@ -9,7 +9,6 @@
 (defn copy-recursive-into
   "Recursively copy the files in src to dest."
   [src dest]
-  (println "Copying " src)
   (let [f (io/file src)]
     (when (.exists f)
       (doseq [file (remove #(.isDirectory %) (file-seq f))]
