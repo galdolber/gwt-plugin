@@ -25,7 +25,7 @@ Sample web resources configuration (to add in your project.clj):
 
 ## Three rounds java compiler
 
-This task is like javac but runs 3 times(incrementally) to support annotations processors.
+This task is like javac but runs 3 times(incrementally) to support annotation processors.
 Only shows errors thrown in the last compilation.
 
     $ lein javacc
