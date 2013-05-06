@@ -7,13 +7,16 @@
   {:module nil ;Required
    :war nil    ;Required
    :deploy "target/extra"
+   :extra "target/extra"
    :gen "target/.generated"
    :logLevel "INFO"
    :port "8080"
+   :compileReport false
    :codeServerPort 9997
    :startupUrl "index.html"
    :noserver false
    :extraJvmArgs nil
+   :style "OBF"
    :localWorkers 1})
 
 (defn print-stream [out]
@@ -81,15 +84,18 @@
 
 (defmethod task "compile" [project args]
   (let [{:keys [extraJvmArgs deploy gen war logLevel port
-                codeServerPort startupUrl noserver module localWorkers]}
+                codeServerPort startupUrl noserver module
+                localWorkers compileReport style extra]}
          (merge defaults (:gwt project))
         args ["java"
               "-cp" (get-classpath project)
               "com.google.gwt.dev.Compiler"
-              "-style" "OBF"
-              "-localWorkers" "2"
+              (if compileReport "-compileReport" nil)
+              "-style" style
+              "-localWorkers" (str localWorkers)
               "-XfragmentCount" "-1"
               "-deploy" (path deploy)
+              "-extra" (path extra)
               "-gen" (path gen)
               "-war" (path war)
               "-logLevel" logLevel
