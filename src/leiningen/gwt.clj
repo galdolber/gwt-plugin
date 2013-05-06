@@ -57,12 +57,16 @@
   (println "options: run, compile. Running...")
   (task project ["run"]))
 
+(defn get-classpath [project]
+  (str (string/join ":" (:java-source-paths project))
+       ":" (classpath project)))
+
 (defmethod task "run" [project args]
   (let [{:keys [extraJvmArgs deploy gen war logLevel port
                 codeServerPort startupUrl noserver module localWorkers]}
          (merge defaults (:gwt project))
         args ["java"
-              "-cp" (classpath project)
+              "-cp" (get-classpath project)
               "com.google.gwt.dev.DevMode"
               (if noserver "-noserver" nil)
               "-deploy" (path deploy)
@@ -80,7 +84,7 @@
                 codeServerPort startupUrl noserver module localWorkers]}
          (merge defaults (:gwt project))
         args ["java"
-              "-cp" (classpath project)
+              "-cp" (get-classpath project)
               "com.google.gwt.dev.Compiler"
               "-style" "OBF"
               "-localWorkers" "2"
