@@ -4,7 +4,7 @@ A Leiningen plugin run and build gwt applications.
 
 ## Usage
 
-Put `[gwt-plugin "0.1.0"]` into the `:plugins` vector of your project.clj.
+Put `[gwt-plugin "0.1.4"]` into the `:plugins` vector of your project.clj.
 
 You can also automate the tasks using
 
