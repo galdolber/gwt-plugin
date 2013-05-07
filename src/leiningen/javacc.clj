@@ -17,7 +17,8 @@
               rel-compiled (.replaceFirst rel-source "\\.java$" ".class")
               compiled (io/file compile-path rel-compiled)]
         :when (>= (.lastModified source) (.lastModified compiled))]
-    (.getPath source)))
+    (do (println source)
+      (.getPath source))))
 
 (defn- javac-options
   "Compile all sources of possible options and add important defaults.
@@ -56,7 +57,7 @@
                "Be sure to use java from a JDK\nrather than a JRE by"
                " either modifying PATH or setting JAVA_CMD."))))
 
-(defn- run-javac-subprocess
+(defn run-javac-subprocess
   "Run javac to compile all source files in the project. The compilation is run
   in a subprocess to avoid it from adding the leiningen standalone to the
   classpath, as leiningen adds itself to the classpath through the
