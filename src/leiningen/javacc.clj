@@ -17,8 +17,7 @@
               rel-compiled (.replaceFirst rel-source "\\.java$" ".class")
               compiled (io/file compile-path rel-compiled)]
         :when (>= (.lastModified source) (.lastModified compiled))]
-    (do (println source)
-      (.getPath source))))
+    (.getPath source)))
 
 (defn- javac-options
   "Compile all sources of possible options and add important defaults.
