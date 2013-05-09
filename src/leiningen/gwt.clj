@@ -17,6 +17,7 @@
    :noserver false
    :extraJvmArgs nil
    :style "OBF"
+   :src "src/main/java"
    :localWorkers 1})
 
 (defn print-stream [out]
@@ -41,9 +42,6 @@
   (string/join
     java.io.File/pathSeparatorChar
     (leiningen.core.classpath/get-classpath project)))
-
-; TODO
-;com.google.gwt.dev.codeserver.CodeServer
 
 (defn- addJvmArgs [args extraJvmArgs]
   (if extraJvmArgs
@@ -99,6 +97,18 @@
               "-gen" (path gen)
               "-war" (path war)
               "-logLevel" logLevel
+              module]]
+    (apply sh (filter (comp not nil?) (addJvmArgs args extraJvmArgs)))))
+
+(defmethod task "codeserver" [project args]
+  (let [{:keys [extraJvmArgs codeserver-port
+                codeServerPort module src]}
+         (merge defaults (:gwt project))
+        args ["java"
+              "-cp" (get-classpath project)
+              "com.google.gwt.dev.codeserver.CodeServer"
+              "-port" (str codeServerPort)
+              "-src" src
               module]]
     (apply sh (filter (comp not nil?) (addJvmArgs args extraJvmArgs)))))
 
