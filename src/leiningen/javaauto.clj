@@ -8,6 +8,6 @@
     (rate 50)
     (file-filter ignore-dotfiles)
     (file-filter (extensions :java))
-    (on-change (fn [_] (run-javac-subprocess project args true))))
+    (on-change (fn [_] (jcompile project args))))
   (while true
     (Thread/sleep 1000)))
