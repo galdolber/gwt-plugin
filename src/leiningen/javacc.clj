@@ -60,17 +60,21 @@
   (let [compile-path (:compile-path project)]
     (stale-java-sources [compile-path] compile-path)))
 
-(defn jcompile [project args files]
-  (println "Compiling" (count files) "source files")
-  (let [out (run-javac-subprocess project args files)
-        new-files (get-files project)]
-    (cond
-     (empty? new-files) true
-     (= files new-files) (println out)
-     :else (jcompile project args new-files))))
+(defn jcompile
+  ([project args]
+    (jcompile project args (get-files project)))
+  ([project args files]
+    (when-not (empty? files)
+      (println "Compiling" (count files) "source files")
+      (let [out (run-javac-subprocess project args files)
+            new-files (get-files project)]
+        (cond
+         (empty? new-files) true
+         (= files new-files) (println out)
+         :else (jcompile project args new-files))))))
 
 (defn javacc [project & args]
   (.mkdirs (clojure.java.io/file (:compile-path project)))
-  (when (jcompile project args (get-files project))
+  (when (jcompile project args)
     (run-javac-subprocess project args
                           (get-uncompiled-generated-files project))))
