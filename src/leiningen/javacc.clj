@@ -65,7 +65,7 @@
     (jcompile project args (get-files project)))
   ([project args files]
     (when-not (empty? files)
-      (println "Compiling" (count files) "source files")
+      (println "Compiling" (count files) "source files to " (:compile-path project))
       (let [out (run-javac-subprocess project args files)
             new-files (get-files project)]
         (cond

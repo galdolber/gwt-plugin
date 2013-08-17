@@ -1,4 +1,4 @@
-(defproject gwt-plugin "0.1.5"
+(defproject gwt-plugin "0.1.6"
   :description "Leiningen plugin for gwt applications"
   :url "http://github.com/galdolber/gwt-plugin"
   :license {:name "Eclipse Public License"
